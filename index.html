@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09110f" />
+    <meta name="description" content="BioMotion is a nature-inspired vehicle aerodynamics lab." />
+    <title>BioMotion — Aerodynamics Lab</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="BioMotion home">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="brand-name">BIOMOTION</span>
+          <span class="brand-code">LAB / 01</span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#lab">Live lab</a>
+          <a href="#principles">Principles</a>
+          <a href="#method">Method</a>
+        </nav>
+        <a class="header-cta" href="#lab"><span>Enter lab</span><span class="arrow">↗</span></a>
+      </header>
+
+      <main id="top">
+        <section class="hero section-wrap">
+          <canvas id="heroFlow" class="hero-flow" aria-hidden="true"></canvas>
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-line"></span>BIOMIMETICS / AERODYNAMICS / 2025</div>
+            <h1>Design that<br /><em>listens</em> to the air.</h1>
+            <p class="hero-lede">A visual study of how nature’s quietest movers can reshape the way vehicles cut through the world.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#lab">Explore the study <span>↘</span></a>
+              <span class="hero-note">Interactive 3D model<br />with live airflow</span>
+            </div>
+          </div>
+          <div class="hero-aside">
+            <div class="hero-orbit orbit-one"></div>
+            <div class="hero-orbit orbit-two"></div>
+            <div class="hero-aside-label">THE QUESTION</div>
+            <p>What if the next leap in mobility is already moving silently beneath the surface of the ocean?</p>
+            <div class="hero-aside-foot"><span>SCROLL TO INVESTIGATE</span><span class="scroll-arrow">↓</span></div>
+          </div>
+          <div class="hero-index"><span>01</span><span class="index-rule"></span><span>04</span></div>
+        </section>
+
+        <section class="intro-strip section-wrap">
+          <div class="strip-kicker">A FIELD NOTE FROM THE LAB</div>
+          <p>BioMotion translates two biological strategies into a conceptual vehicle study: <strong>shark riblets</strong> for surface flow, and <strong>owl feather edges</strong> for quieter wake behavior.</p>
+          <span class="strip-mark">✳</span>
+        </section>
+
+        <section id="lab" class="lab-section section-wrap">
+          <div class="section-heading">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-line"></span>LIVE SIMULATION / 01</div>
+              <h2>Read the <em>airflow.</em></h2>
+            </div>
+            <p class="section-description">Tune the conditions. Watch the geometry respond. Every value below is calculated live from the same simple drag model.</p>
+          </div>
+
+          <div class="lab-layout">
+            <div class="scene-panel panel-surface">
+              <div class="scene-toolbar">
+                <div><span class="status-dot"></span><span>LIVE WIND TUNNEL</span></div>
+                <div class="scene-toolbar-meta">ORBIT TO INSPECT <span class="meta-divider"></span> FPS <span id="fpsReadout">60</span></div>
+              </div>
+              <div id="sceneWrap" class="scene-wrap">
+                <canvas id="sceneCanvas" aria-label="Interactive 3D comparison of conventional and bio-inspired vehicles"></canvas>
+                <div id="labelConv" class="scene-label"><span class="label-number">01</span><span><strong>NORMAL CAR</strong><small id="labelConvSub">BASELINE BODY</small><span class="wake-meter"><i id="wakeBarConv"></i></span></span></div>
+                <div id="labelBio" class="scene-label scene-label-bio"><span class="label-number accent-number">02</span><span><strong>BIO-INSPIRED CAR</strong><small id="labelBioSub">RIBLETS + OWL EDGE</small><span class="wake-meter"><i id="wakeBarBio"></i></span></span></div>
+                <div class="flow-readout"><span class="flow-icon">≈</span><span>AIRFLOW<br /><strong id="flowPhaseLabel">PHASE 00</strong></span></div>
+                <div class="noise-hud" aria-live="polite"><div class="hud-title">WAKE NOISE</div><div class="hud-row"><i class="hud-dot conv"></i>NORMAL <b id="hudConv">68</b> dBA</div><div class="hud-row"><i class="hud-dot bio"></i>BIO <b id="hudBio">57</b> dBA</div><div class="hud-delta" id="hudDelta" data-dir="flat">move a control: noise added / reduced</div></div>
+                <div class="scene-compass"><span>N</span><span class="compass-ring"></span><span>E</span></div>
+                <div class="speed-legend"><span>SLOW / WAKE</span><i></i><span>FAST</span></div>
+              </div>
+              <div class="scene-footer">
+                <div class="mode-switch" role="group" aria-label="Visualization mode">
+                  <button class="mode-button active" data-mode="split">Split study</button>
+                  <button class="mode-button" data-mode="bio">Bio model</button>
+                </div>
+                <div class="layer-switch" role="group" aria-label="Flow layers"><button class="layer-chip active" data-layer="streams">Streamlines</button><button class="layer-chip active" data-layer="particles">Particles</button><button class="layer-chip active" data-layer="smoke">Wake haze</button></div>
+                <div class="legend"><span><i class="legend-swatch swatch-conventional"></i>normal car / baseline</span><span><i class="legend-swatch swatch-bio"></i>bio-inspired car</span></div>
+              </div>
+            </div>
+
+            <aside class="control-panel panel-surface" aria-label="Simulation controls">
+              <div class="panel-kicker">CONTROL DECK <span>01—04</span></div>
+              <h3>Shape the conditions.</h3>
+              <p class="panel-intro">Change the atmosphere around the vehicle. The model responds in real time.</p>
+
+              <div class="control-stack">
+                <label class="range-control">
+                  <span class="range-heading"><span>VEHICLE SPEED</span><output id="speedValue">100</output><small>km/h</small></span>
+                  <input id="speedRange" type="range" min="20" max="200" step="10" value="100" />
+                  <span class="range-scale"><span>20</span><span>200</span></span>
+                </label>
+                <label class="range-control">
+                  <span class="range-heading"><span>AIR DENSITY</span><output id="densityValue">1.225</output><small>kg/m³</small></span>
+                  <input id="densityRange" type="range" min="0.8" max="1.4" step="0.025" value="1.225" />
+                  <span class="range-scale"><span>0.8</span><span>1.4</span></span>
+                </label>
+                <label class="range-control">
+                  <span class="range-heading"><span>FRONTAL AREA</span><output id="areaValue">2.2</output><small>m²</small></span>
+                  <input id="areaRange" type="range" min="1.5" max="3" step="0.1" value="2.2" />
+                  <span class="range-scale"><span>1.5</span><span>3.0</span></span>
+                </label>
+                <label class="range-control">
+                  <span class="range-heading"><span>AIRFLOW PHASE</span><output id="phaseValue">00</output><small>/ 20</small></span>
+                  <input id="phaseRange" type="range" min="0" max="20" step="1" value="0" />
+                  <span class="range-scale"><span>still</span><span>turbulent</span></span>
+                </label>
+              </div>
+
+              <div class="divider"></div>
+              <div class="feature-heading"><span>BIO-INSPIRED FEATURES</span><span class="feature-status">LIVE</span></div>
+              <div class="feature-list">
+                <label class="toggle-row"><span class="toggle-copy"><span class="toggle-icon riblet-icon">≋</span><span><strong>Surface riblets</strong><small>shark-inspired flow control</small></span></span><input id="ribletToggle" type="checkbox" checked /><span class="toggle-ui"></span></label>
+                <label class="toggle-row"><span class="toggle-copy"><span class="toggle-icon owl-icon">⌁</span><span><strong>Owl edge details</strong><small>serrated wake diffusion</small></span></span><input id="owlToggle" type="checkbox" checked /><span class="toggle-ui"></span></label>
+              </div>
+              <div class="audio-block">
+                <div class="divider"></div>
+                <div class="feature-heading"><span>WAKE NOISE · AUDIO</span><span class="feature-status">OPT-IN</span></div>
+                <div class="feature-list">
+                  <label class="toggle-row"><span class="toggle-copy"><span class="toggle-icon sound-icon">♪</span><span><strong>Hear the wake</strong><small>synthesised from the live dB model</small></span></span><input id="soundToggle" type="checkbox" /><span class="toggle-ui"></span></label>
+                  <div class="src-switch" role="group" aria-label="Which car to listen to"><button class="src-chip" data-src="conv">Normal car</button><button class="src-chip active" data-src="bio">Bio car</button></div>
+                </div>
+              </div>
+              <button id="resetButton" class="reset-button">Reset conditions <span>↺</span></button>
+            </aside>
+          </div>
+        </section>
+
+        <section class="metrics-section section-wrap">
+          <div class="metrics-intro"><div class="eyebrow"><span class="eyebrow-line"></span>READOUT / CONCEPTUAL MODEL</div><p>One formula. Two silhouettes. A meaningful difference.</p></div>
+          <div class="metrics-grid">
+            <article class="metric-card metric-card-primary"><span class="metric-label">BIO-INSPIRED DRAG</span><div class="metric-value"><strong id="bioDragValue">323</strong><span>N</span></div><div class="metric-foot"><span>at current conditions</span><span class="metric-chip">↓ <b id="dragReductionValue">20.0</b>%</span></div></article>
+            <article class="metric-card"><span class="metric-label">BASELINE DRAG</span><div class="metric-value"><strong id="conventionalDragValue">404</strong><span>N</span></div><div class="metric-foot"><span>conventional form</span><span class="metric-neutral">Cd 0.30</span></div></article>
+            <article class="metric-card"><span class="metric-label">ACOUSTIC INDICATOR</span><div class="metric-value"><strong id="acousticValue">57</strong><span>dBA</span></div><div class="metric-foot"><span>conceptual wake noise</span><span class="metric-chip">↓ <b id="noiseSavedValue">11.0</b> dB</span></div></article>
+            <article class="metric-card metric-card-callout"><div class="callout-number">−<span id="savedDragValue">81</span>N</div><p>less drag at the same speed, in this illustrative model.</p><span class="callout-arrow">↘</span></article>
+          </div>
+          <div class="noise-lab">
+            <div class="noise-lab-head"><div class="eyebrow"><span class="eyebrow-line"></span>NOISE / ADDED &amp; REDUCED</div><p>Every control adds or removes decibels against a 68 dBA reference. The bio features then cut the normal car’s level. Conceptual, not measured.</p></div>
+            <div class="noise-lab-grid">
+              <div class="noise-levels">
+                <div class="noise-level"><span class="nl-label">NORMAL CAR</span><div class="nl-num"><strong id="noiseConvValue">68</strong><small>dBA</small></div><span class="nl-bar"><i id="noiseConvBar"></i></span></div>
+                <div class="noise-level bio"><span class="nl-label">BIO-INSPIRED CAR</span><div class="nl-num"><strong id="noiseBioValue">57</strong><small>dBA</small></div><span class="nl-bar"><i id="noiseBioBar"></i></span></div>
+                <div class="noise-net"><span>NET VS REFERENCE (NORMAL CAR)</span><b id="noiseAddedValue" data-dir="flat">±0.0</b><small>dB</small></div>
+                <div class="noise-delta" id="noiseDelta" data-dir="flat">Move a control to see noise added or reduced.</div>
+              </div>
+              <div class="noise-breakdown" id="noiseBreakdown" aria-label="Noise contribution of each variable"></div>
+            </div>
+          </div>
+          <div class="equation-row"><span>DRAG FORCE</span><span class="equation">F<sub>d</sub> = ½ ρ v² C<sub>d</sub> A</span><span class="equation-note">Illustrative assumptions, not measured vehicle specifications.</span></div>
+        </section>
+
+        <section id="principles" class="principles-section section-wrap">
+          <div class="section-heading compact-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span>THE TRANSLATION / 02</div><h2>Nature leaves <em>clues.</em></h2></div><p class="section-description">The best engineering often starts by paying closer attention to structures that have already solved the problem.</p></div>
+          <div class="principle-grid">
+            <article class="principle-card principle-shark"><div class="principle-number">01</div><div class="principle-graphic graphic-riblets"><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="principle-copy"><div class="principle-tag">SHARK / SURFACE</div><h3>Riblets align the flow.</h3><p>Microscopic grooves on shark skin guide water along the body. Here, the idea becomes a surface texture designed to reduce small-scale turbulence.</p><a href="#lab">See it in the model <span>↗</span></a></div></article>
+            <article class="principle-card principle-owl"><div class="principle-number">02</div><div class="principle-graphic graphic-feathers"><span>⌁</span><span>⌁</span><span>⌁</span><span>⌁</span></div><div class="principle-copy"><div class="principle-tag">OWL / EDGE</div><h3>Feathers soften the wake.</h3><p>Owl wing edges break one loud wake into many quieter vortices. A serrated trailing edge gives that strategy a new surface to explore.</p><a href="#lab">See it in the model <span>↗</span></a></div></article>
+            <article class="principle-card principle-wind"><div class="principle-number">03</div><div class="principle-graphic graphic-flow"><i></i><i></i><i></i></div><div class="principle-copy"><div class="principle-tag">WIND / SYSTEM</div><h3>One system, many signals.</h3><p>Drag and sound are connected. A smoother path through air can mean less energy lost, less wake, and a calmer cabin.</p><a href="#method">Read the method <span>↗</span></a></div></article>
+          </div>
+        </section>
+
+        <section id="method" class="method-section section-wrap"><div class="method-mark">✳</div><div><div class="eyebrow"><span class="eyebrow-line"></span>METHOD NOTE / 03</div><h2>A clear model<br />is a useful <em>conversation.</em></h2></div><div class="method-copy"><p>BioMotion is an educational instrument, not a wind-tunnel report. The 3D forms and outputs are deliberately conceptual, designed to make relationships visible and invite better questions.</p><div class="method-signature"><span>ρ density</span><span>v velocity</span><span>C<sub>d</sub> drag coefficient</span><span>A frontal area</span></div></div></section>
+
+        <footer class="site-footer section-wrap"><div class="footer-brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>BIOMOTION</span></div><p>Nature-inspired vehicle engineering / visual study 01</p><span class="footer-code">© 2025 / CONCEPTUAL ONLY</span></footer>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
